@@ -15,15 +15,15 @@ public class EmployeeController {
     @RequestMapping("/")
     public String welcome()
     {
-        return "Welcome to the Employee and Manager Lord of The Ring API!";
+        return "Welcome to the Employee and Manager Lord of The Rings API!";
     }
     @RequestMapping("/employees")
     public ArrayList<Employee> getAllEmployees()
     {
         return employeeService.getAllEmployees();
     }
-    @RequestMapping("/employees/{firstName}_{lastName}")
-    public Employee getEmployeeByName(@PathVariable String firstName,@PathVariable String lastName)
+    @RequestMapping("/employees/get")
+    public List<Employee> getEmployeeByName(@RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName)
     {
         return employeeService.getByName(firstName,lastName);
     }
@@ -44,4 +44,19 @@ public class EmployeeController {
         return employeeService.getAllManagers();
     }
 
+    @RequestMapping("/managers/{name}")
+    public ArrayList<Manager> getManagerByName(@PathVariable String name)
+    {
+        return employeeService.getManagerByName(name);
+    }
+    @RequestMapping("employees/getByManager")
+    public List<Employee> getEmployeesByManager(@RequestParam(value = "manager") String manager)
+    {
+        return employeeService.getByManager(manager);
+    }
+    @RequestMapping(value = "/managers/set",method = RequestMethod.POST)
+    public void setManager(@RequestBody Manager manager)
+    {
+        employeeService.setManager(manager);
+    }
 }

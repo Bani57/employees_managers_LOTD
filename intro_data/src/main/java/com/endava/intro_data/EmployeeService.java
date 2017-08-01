@@ -25,16 +25,28 @@ public class EmployeeService {
     {
         employeeRepository.save(employee);
     }
-    public Employee getByName(String firstName,String lastName)
+    public List<Employee> getByName(String firstName,String lastName)
     {
-        return employeeRepository.findOneByFirstNameAndLastName(firstName,lastName);
+        return employeeRepository.findAllByFirstNameAndLastName(firstName,lastName);
     }
     public List<Employee> getByRole(String role)
     {
-        return employeeRepository.findAllByRole(role);
+        return employeeRepository.findEmployeeByRole(role);
     }
     public ArrayList<Manager> getAllManagers()
     {
         return (ArrayList<Manager>)managerRepository.findAll();
+    }
+    public ArrayList<Manager> getManagerByName(String name)
+    {
+        return (ArrayList<Manager>)managerRepository.adafsafasfsa(name);
+    }
+    public List<Employee> getByManager(String manager)
+    {
+        return employeeRepository.findAllByManagerName(manager);
+    }
+    public void setManager(Manager manager)
+    {
+        managerRepository.save(manager);
     }
 }
